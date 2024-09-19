@@ -20,8 +20,6 @@ def mask_account_card(card: str) -> str:
         mask = name + numb_mask
         return mask
 
-#print(mask_account_card("MasterCard 7158300734726756"))
-
 
 def get_date(raw_date: str) -> str:
     """Функция принимает на вход строку с датой в формате '2024-03-11T02:26:18.671407'
