@@ -1,4 +1,4 @@
-def filter_by_state(data: list[dict[str, str]], state: str = 'EXECUTED') -> list[dict[str, str]]:
+def filter_by_state(data: list[dict[str]], state: str = 'EXECUTED') -> list[dict[str]]:
     """Функция фильтрует данные по указанному состоянию"""
     return [d for d in data if d.get('state') == state]
 
