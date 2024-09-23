@@ -18,7 +18,11 @@ def test_mask_account_card(card: str, mask_card: str) -> None:
     assert mask_account_card(card) == mask_card
 
 
-@pytest.mark.parametrize('date_time, date_out', [('2024-03-11T02:26:18.671407', '11.03.2024'), ('', '')])
-
-def test_get_date(date_time, date_out):
+@pytest.mark.parametrize('date_time, date_out', [('2024-03-11T02:26:18.671407', '11.03.2024'),
+                                                 ('', ''),
+                                                 ('2024-03-11T02:26:18', '11.03.2024'),
+                                                 ('2024-03-11', '11.03.2024')
+                                                 ]
+                         )
+def test_get_date(date_time: str, date_out: str) -> None:
     assert get_date(date_time) == date_out
