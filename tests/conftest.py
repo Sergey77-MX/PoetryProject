@@ -105,10 +105,10 @@ def usd_transaction():
                 {
                     'amount': '79114.93',
                     'currency':
-                     {
-                         'name': 'USD',
-                         'code': 'USD'
-                     }
+                    {
+                        'name': 'USD',
+                        'code': 'USD'
+                    }
                 },
             'description': 'Перевод со счета на счет',
             'from': 'Счет 19708645243227258542',

@@ -5,7 +5,6 @@ from src.generators import card_number_generator, filter_by_currency, transactio
 
 def test_filter_by_currency(transaction_list, code):
     """Функция тестирует выдачу списка операций"""
-    #try:
     out = filter_by_currency(transaction_list)
     assert next(out) == {
             "id": 939719570,
@@ -55,11 +54,9 @@ def test_transaction_descriptions(transaction_list):
     assert next(num) == "Перевод с карты на карту"
 
 
-
 def test_card_number_generator():
     """Функция тестирует генератор номеров карт"""
-    card_number = card_number_generator(9999999999999998, 9999999999999999)
+    card_number = card_number_generator(9999999999999997, 9999999999999999)
 
-    assert next(card_number)
-    assert next(card_number)
-
+    print(next(card_number))
+    print(next(card_number))

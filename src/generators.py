@@ -1,7 +1,5 @@
-from typing import Iterator
-
-
-def filter_by_currency(transactions, code = "USD") -> Iterator:
+def filter_by_currency(transactions, code="USD"):
+    """Функция возвращает итератор, где валюта соответствует заданной в параметре"""
     if len(transactions) > 0:
         for transaction in transactions:
             if transaction["operationAmount"]["currency"]["code"] == code:
@@ -10,7 +8,7 @@ def filter_by_currency(transactions, code = "USD") -> Iterator:
         raise StopIteration("Ввели пустой список")
 
 
-def transaction_descriptions(transactions) -> Iterator:
+def transaction_descriptions(transactions):
     """Функция принимает список словарей транзакций и возвращает описание каждой"""
     if not transactions:
         print("Нет транзакций")
@@ -18,9 +16,9 @@ def transaction_descriptions(transactions) -> Iterator:
         yield description.get("description")
 
 
-def card_number_generator(start: int, end: int) -> Iterator:
+def card_number_generator(start, stop):
     """Функция генерирует номера карт в указанном диапазоне"""
-    for num in range(start, end + 1):
+    for num in range(start, stop + 1):
         card_number = str(num)
         while len(card_number) < 16:
             card_number += "0"
