@@ -1,5 +1,3 @@
-import pytest
-
 from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
 
 
@@ -58,5 +56,5 @@ def test_card_number_generator():
     """Функция тестирует генератор номеров карт"""
     card_number = card_number_generator(9999999999999997, 9999999999999999)
 
-    print(next(card_number))
-    print(next(card_number))
+    assert next(card_number)
+    assert next(card_number)
