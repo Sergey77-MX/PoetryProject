@@ -6,8 +6,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 values = os.getenv("PASSWORD")
-# keys = os.getenv("API_KEY")
-# headers = {keys: values}
 
 
 def currency_conversion(transaction: Any) -> Any:
