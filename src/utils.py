@@ -2,8 +2,8 @@ import json
 import os
 
 from dotenv import load_dotenv
-from src.external_api import convert_to_rub
 
+from src.external_api import convert_to_rub
 
 load_dotenv()
 api_key = os.getenv("API_KEY")
