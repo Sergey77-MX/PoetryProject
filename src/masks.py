@@ -6,10 +6,10 @@ PATH_TO_FILE = PATH_TO_PROJECT / "data" / "operations.json"
 
 logger = logging.getLogger("masks")
 logger.setLevel(logging.INFO)
-fileHandler = logging.FileHandler(PATH_TO_PROJECT / "logs" / "masks.log", encoding="UTF-8", mode="w")
-fileFormatter = logging.Formatter("%(asctime)s %(name)s %(levelname)s: %(message)s")
-fileHandler.setFormatter(fileFormatter)
-logger.addHandler(fileHandler)
+file_handler = logging.FileHandler(PATH_TO_PROJECT / "logs" / "masks.log", encoding="UTF-8", mode="w")
+file_formatter = logging.Formatter("%(asctime)s %(name)s %(levelname)s: %(message)s")
+file_handler.setFormatter(file_formatter)
+logger.addHandler(file_handler)
 
 
 def get_mask_card_number(card_numb: str) -> str:
