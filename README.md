@@ -53,6 +53,7 @@ pytest
 Чтобы посмотреть на сколько процентов функциональный код покрыт тестами, наберите команду: 
 ```commandline
 poetry run pytest --cov
+pytest . --cov src --cov-report term-missing
 ```
 
 ## Команда проекта:
