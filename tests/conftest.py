@@ -1,5 +1,6 @@
 from typing import Any
 
+import pandas as pd
 import pytest
 
 
@@ -125,3 +126,51 @@ def usd_transaction():
             'from': 'Visa Classic 6831982476737658',
             'to': 'Visa Platinum 8990922113665229'
         }]
+
+
+@pytest.fixture
+def test_df() -> pd.DataFrame:
+    """Фикстура, создающая тестовый DataFrame"""
+
+    test_dict = {
+        "id": [650703.0, 3598919.0],
+        "state": ["EXECUTED", "EXECUTED"],
+        "date": ["2023-09-05T11:30:32Z", "2020-12-06T23:00:58Z"],
+        "amount": [16210.0, 29740.0],
+        "currency_name": ["Sol", "Peso"],
+        "currency_code": ["PEN", "COP"],
+        "from": ["Счет 58803664561298323391", "Discover 3172601889670065"],
+        "to": ["Счет 39745660563456619397", "Discover 0720428384694643"],
+        "description": ["Перевод организации", "Перевод с карты на карту"]
+    }
+
+    return pd.DataFrame(test_dict)
+
+
+@pytest.fixture
+def test_df_1() -> pd.DataFrame:
+    """Фикстура, создающая тестовый DataFrame"""
+    test_dict = {}
+    return pd.DataFrame(test_dict)
+
+
+@pytest.fixture
+def test_df_2() -> pd.DataFrame:
+    """Фикстура, создающая тестовый DataFrame"""
+    test_dict = ['1, 2, 3']
+    return pd.DataFrame(test_dict)
+
+
+@pytest.fixture
+def trans_1():
+    return {"amount": 92688.46, "currency": "USD"}
+
+
+@pytest.fixture
+def trans_2():
+    return {"amount": 92688.46, "currency": "EUR"}
+
+
+@pytest.fixture
+def trans_3():
+    return {"amount": 0, "currency": "USD"}
