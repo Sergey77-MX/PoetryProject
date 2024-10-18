@@ -1,23 +1,6 @@
 from unittest.mock import patch
 
-import pytest
-
 from src.external_api import convert_to_rub
-
-
-@pytest.fixture
-def trans_1():
-    return {"amount": 92688.46, "currency": "USD"}
-
-
-@pytest.fixture
-def trans_2():
-    return {"amount": 92688.46, "currency": "EUR"}
-
-
-@pytest.fixture
-def trans_3():
-    return {"amount": 0, "currency": "USD"}
 
 
 @patch('requests.get')
