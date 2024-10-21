@@ -32,16 +32,16 @@ def test_reader_file_transaction_csv_2(mock_reader):
     mock_reader.return_value = iter([])
 
 
-@patch('src.reader_data.pd.read_excel')
+@patch('src.reader_data_excel.pd.read_excel')
 def test_reader_file_transaction_excel(mock_read, test_df):
     mock_read.return_value = test_df
 
 
-@patch('src.reader_data.pd.read_excel')
+@patch('src.reader_data_excel.pd.read_excel')
 def test_reader_file_transaction_excel_1(mock_read, test_df_1):
     mock_read.return_value = test_df_1
 
 
-@patch('src.reader_data.pd.read_excel')
+@patch('src.reader_data_excel.pd.read_excel')
 def test_reader_file_transaction_excel_2(mock_read, test_df_2):
     mock_read.return_value = test_df_2
