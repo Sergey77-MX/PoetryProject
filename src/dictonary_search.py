@@ -24,8 +24,8 @@ def search_transactions(transactions: list[dict], search_string: str) -> list[di
             result.append(transaction)
     return result
 
-if __name__ == "__main__":
-    print(search_transactions(json_file, 'Перевод со счета на счет'))
+# if __name__ == "__main__":
+#     print(search_transactions(json_file, 'Перевод со счета на счет'))
 
 
 def count_transactions(transactions: list[dict], user_categories: list) -> dict:
@@ -48,5 +48,5 @@ def count_transactions(transactions: list[dict], user_categories: list) -> dict:
     return dict(collections.Counter(count))
 
 
-if __name__ == "__main__":
-    print(count_transactions(json_file, ["Перевод организации", "открытие вклада", "Перевод со счета на счет"]))
+# if __name__ == "__main__":
+#     print(count_transactions(json_file, ["Перевод организации", "открытие вклада", "Перевод со счета на счет"]))
