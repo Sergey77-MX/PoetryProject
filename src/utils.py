@@ -14,7 +14,6 @@ api_key = os.getenv("API_KEY")
 PATH_TO_PROJECT = Path(__file__).resolve().parent.parent
 PATH_TO_FILE = PATH_TO_PROJECT / "data" / "operations.json"
 
-
 logger = logging.getLogger("utils")
 logger.setLevel(logging.DEBUG)
 file_handler = logging.FileHandler(PATH_TO_PROJECT / "logs" / "utils.log", encoding="UTF-8", mode="w")
@@ -23,22 +22,24 @@ file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
 
 
+path = Path('/home/sergey/Рабочий стол/мои проекты/PoetryProject/data/operations.json')
+
 def financial_transactions(path):
-    """Принимает путь до JSON-файла и возвращает список словарей с данными о финансовых транзакциях"""
+    """Функция которая принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых
+    транзакциях. Если файл пустой, содержит не список или не найден, функция возвращает пустой список"""
     try:
-        with open(path, "r", encoding="utf-8") as operations:
-            try:
-                logger.info("Получаем данные json файла")
-                transactions_data = json.load(operations)
-                return transactions_data
-            except json.JSONDecodeError:
-                logger.error("Ошибка! Некорректные данные json файла")
-                transactions_data = []
-                return transactions_data
-    except FileNotFoundError:
-        logger.error("Файл не был найден")
-        transactions_data = []
-        return transactions_data
+        logger.info("Открываем файл JSON файл")
+
+        with open(path, encoding="utf-8") as file:
+            data = json.load(file)
+            return data
+
+    except FileNotFoundError as ex:
+        logger.error(f"Произошла ошибка: {ex}")
+        return []
+    except json.JSONDecodeError as ex:
+        logger.error(f"Произошла ошибка: {ex}")
+        return []
 
 
 def transaction_amount(transactions, transaction_id):
@@ -60,3 +61,7 @@ def transaction_amount(transactions, transaction_id):
     else:
         logger.error("Транзакция не найдена")
         return "Транзакция не найдена"
+
+
+# if __name__ == "__main__":
+#     print(financial_transactions(path))
