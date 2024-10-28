@@ -2,6 +2,9 @@ import os
 
 from _datetime import datetime
 
+from numpy.ma.core import append
+from openpyxl.pivot.fields import Boolean
+
 from src.masks import get_mask_account, get_mask_card_number
 from src.processing import filter_by_state, sort_by_date
 from src.utils import PATH_TO_FILE, financial_transactions
@@ -9,10 +12,15 @@ from src.reader_data_csv import reader_file_transaction_csv, PATH_TO_CSV
 from src.reader_data_excel import reader_file_transaction_excel, PATH_TO_EXCEL
 
 
+list_by_state = []
+filter_transaction_date = []
+transactions_from_file = []
+direction = bool
+
 def main():
     """Отвечает за основную логику проекта с пользователем и связывает функциональности между собой."""
-    global list_by_status, filter_transaction_date
-    # filter_transaction_date = []
+    # global list_by_status, filter_transaction_date
+
     print("Добро пожаловать в программу работы с банковскими транзакциями.")
     print(
         """Выберите необходимый пункт меню:
@@ -33,39 +41,49 @@ def main():
         transactions_from_file = reader_file_transaction_excel(PATH_TO_EXCEL)
     else:
         print("Введен некорректный номер.")
-        return
+    # print(transactions_from_file)
+    # return
 
-    while True:
-        print(
-            """Введите статус, по которому необходимо выполнить фильтрацию.
-    Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING"""
-        )
-        user_input_state = input().upper()
-        if user_input_state != "EXECUTED" and user_input_state != "CANCELED" and user_input_state != "PENDING":
-            print(f"Статус операции {user_input_state} недоступен.")
-            continue
-        print(f"Операции отфильтрованы по статусу {user_input_state}")
-        list_by_status = filter_by_state(transactions_from_file, user_input_state)
-        break
+    print('Введите статус, по которому необходимо выполнить фильтрацию. '
+          'Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING')
+    user_state = input().upper()
+    states_list = ['EXECUTED', 'CANCELED', 'PENDING']
+    while user_state not in states_list:
+        print(f"Статус операции {user_state} недоступен.")
+        print("Введите статус, по которому необходимо выполнить фильтрацию. "
+              "Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING")
+        user_state = input().upper()
+    else:
+        state = (f"'{user_state}'")
+        list_by_status = filter_by_state(transactions_from_file, 'state')
+        list_by_state.append(list_by_status)
+        print(f"Операции отфильтрованы по статусу {user_state}")
+        print(transactions_from_file)
+        print(state)
+        print(list_by_state)
 
     print("Отсортировать операции по дате? Да/Нет")
-    user_input_date = input("Введите да или нет ").lower()
+
+    user_input_date = input().lower()
     if user_input_date == "да":
         print("Отсортировать по возрастанию или по убыванию?")
-        user_input_up_down = input().lower()
-        if user_input_up_down == "по убыванию":
-            user_input_up_down == True
-        elif user_input_up_down == "по возрастанию":
-            user_input_up_down == False
-            filter_transaction_date = sort_by_date(filter, user_input_up_down)
+        user_input = input().lower()
+        if user_input == "по убыванию":
+            filter_transaction_date = sort_by_date(list_by_status)
+            # user_input_up_down == True
+        elif user_input == "по возрастанию":
+            direction = False
+            # user_input_up_down == False
+            filter_transaction_date = sort_by_date(list_by_status, direction)
         else:
             print("Введен некорректный ответ.")
-            return
+            # return
     elif user_input_date == "нет":
-        filter_transaction_date = filter
+        filter_transaction_date = list_by_status
     else:
         print("Введен некорректный ответ.")
-        return
+    print(filter_transaction_date)
+        # return
 
 
     print("Выводить только рублевые транзакции? Да/Нет")
@@ -81,7 +99,7 @@ def main():
         #     rub_trans.append(trans)
     else:
         print("Введен некорректный ответ.")
-        return
+        # return
 
     print("Отфильтровать список транзакций по определенному слову в описании? Да/Нет")
     sort_by_word = input("Введите да или нет: ").lower()
@@ -97,10 +115,10 @@ def main():
             trans_word.append(trans)
     else:
         print("Введен некорректный ответ.")
-        return
+        # return
     if len(trans_word) == 0:
         print("Не найдено ни одной транзакции, подходящей под ваши условия фильтрации")
-        return
+        # return
 
     print("Распечатываю итоговый список транзакций...")
     print(f"Всего банковских операций в выборке: {len(trans_word)}\n")
@@ -185,16 +203,16 @@ main()
 #
 #
 #
-#     print('Введите статус, по которому необходимо выполнить фильтрацию. '
-#           'Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING')
-#     state = input("")
-#     states_list = ['EXECUTED', 'CANCELED', 'PENDING']
-#     while state.upper() not in states_list:
-#         print(f"Статус операции {state} недоступен.")
-#         print("Введите статус, по которому необходимо выполнить фильтрацию. "
-#               "Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING")
-#         state = input()
-#     else:
+    # print('Введите статус, по которому необходимо выполнить фильтрацию. '
+    #       'Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING')
+    # state = input("")
+    # states_list = ['EXECUTED', 'CANCELED', 'PENDING']
+    # while state.upper() not in states_list:
+    #     print(f"Статус операции {state} недоступен.")
+    #     print("Введите статус, по которому необходимо выполнить фильтрацию. "
+    #           "Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING")
+    #     state = input()
+    # else:
 #         # Сортировка по статусу
 #
 #         print(filter_by_state(operations, "state"))
@@ -205,9 +223,9 @@ main()
 #
 #         # return filter_by_state
 #
-# # def sorting_by_status(operations_list, states):
-# #     list_by_status = filter_by_state(operations_list, 'states')
-# #     return list_by_status
+# def sorting_by_status(operations_list, states):
+#     list_by_status = filter_by_state(operations_list, 'states')
+#     return list_by_status
 #
 # if __name__ == "__main__":
 #     res = main()
