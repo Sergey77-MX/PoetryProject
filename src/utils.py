@@ -5,6 +5,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+
 from src.external_api import convert_to_rub
 
 load_dotenv()
@@ -13,6 +14,7 @@ api_key = os.getenv("API_KEY")
 
 PATH_TO_PROJECT = Path(__file__).resolve().parent.parent
 PATH_TO_FILE = PATH_TO_PROJECT / "data" / "operations.json"
+# path = PATH_TO_FILE
 
 logger = logging.getLogger("utils")
 logger.setLevel(logging.DEBUG)
@@ -22,13 +24,13 @@ file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
 
 
-path = Path('/home/sergey/Рабочий стол/мои проекты/PoetryProject/data/operations.json')
+# path = Path('/home/sergey/Рабочий стол/мои проекты/PoetryProject/data/operations.json')
 
 def financial_transactions(path):
-    """Функция которая принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых
+    """Функция, которая принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых
     транзакциях. Если файл пустой, содержит не список или не найден, функция возвращает пустой список"""
     try:
-        logger.info("Открываем файл JSON файл")
+        logger.info("Открываем JSON файл")
 
         with open(path, encoding="utf-8") as file:
             data = json.load(file)

@@ -18,9 +18,7 @@ def search_transactions(transactions: list[dict], search_string: str) -> list[di
     pattern = re.compile(re.escape(search_string), re.IGNORECASE)
     for transaction in transactions:
         desc = transaction.get("description", "")
-        if type(desc) and type(desc) is not str:
-            pass
-        elif re.search(pattern, desc):
+        if re.search(pattern, desc):
             result.append(transaction)
     return result
 
