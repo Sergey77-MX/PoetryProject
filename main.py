@@ -2,9 +2,6 @@ import os
 
 from _datetime import datetime
 
-from numpy.ma.core import append
-from openpyxl.pivot.fields import Boolean
-
 from src.masks import get_mask_account, get_mask_card_number
 from src.processing import filter_by_state, sort_by_date
 from src.utils import PATH_TO_FILE, financial_transactions
@@ -12,14 +9,9 @@ from src.reader_data_csv import reader_file_transaction_csv, PATH_TO_CSV
 from src.reader_data_excel import reader_file_transaction_excel, PATH_TO_EXCEL
 
 
-list_by_state = []
-filter_transaction_date = []
-transactions_from_file = []
-direction = bool
-
 def main():
     """Отвечает за основную логику проекта с пользователем и связывает функциональности между собой."""
-    # global list_by_status, filter_transaction_date
+    global list_by_status, filter_transaction_date
 
     print("Добро пожаловать в программу работы с банковскими транзакциями.")
     print(
@@ -29,6 +21,7 @@ def main():
     3. Получить информацию о транзакциях из XLSX-файла"""
     )
 
+    transactions_from_file = []
     user_input_file = input()
     if user_input_file == "1":
         print("Для обработки выбран JSON-файл.")
@@ -41,9 +34,9 @@ def main():
         transactions_from_file = reader_file_transaction_excel(PATH_TO_EXCEL)
     else:
         print("Введен некорректный номер.")
-    # print(transactions_from_file)
+    print(transactions_from_file)
     # return
-
+    list_by_status = []
     print('Введите статус, по которому необходимо выполнить фильтрацию. '
           'Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING')
     user_state = input().upper()
@@ -54,16 +47,17 @@ def main():
               "Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING")
         user_state = input().upper()
     else:
-        state = (f"'{user_state}'")
-        list_by_status = filter_by_state(transactions_from_file, 'state')
-        list_by_state.append(list_by_status)
+        # state = (f"'{user_state}'")
+        list_by_status = filter_by_state(transactions_from_file, user_state)
+        # list_by_state.append(list_by_status)
         print(f"Операции отфильтрованы по статусу {user_state}")
-        print(transactions_from_file)
-        print(state)
-        print(list_by_state)
+        # print(transactions_from_file)
+        print(user_state)
+        print(list_by_status)
 
     print("Отсортировать операции по дате? Да/Нет")
 
+    filter_transaction_date = []
     user_input_date = input().lower()
     if user_input_date == "да":
         print("Отсортировать по возрастанию или по убыванию?")
@@ -85,11 +79,10 @@ def main():
     print(filter_transaction_date)
         # return
 
-
+    rub_trans = []
     print("Выводить только рублевые транзакции? Да/Нет")
     user_input_curr = input().lower()
     if user_input_curr == "да":
-        rub_trans = []
         for trans in filter_transaction_date:
             if trans["operationAmount"]["currency"]["code"] == "RUB":
                 rub_trans.append(trans)
@@ -101,6 +94,8 @@ def main():
         print("Введен некорректный ответ.")
         # return
 
+    # rub_trans = []
+    trans_word = []
     print("Отфильтровать список транзакций по определенному слову в описании? Да/Нет")
     sort_by_word = input("Введите да или нет: ").lower()
     if sort_by_word == "да":
