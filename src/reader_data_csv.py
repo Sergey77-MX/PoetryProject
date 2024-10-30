@@ -1,9 +1,9 @@
 import csv
-
 from pathlib import Path
 
 PATH_TO_PROJECT = Path(__file__).resolve().parent.parent
-PATH_TO_FILE = PATH_TO_PROJECT / "data" / "transactions.csv"
+PATH_TO_CSV = PATH_TO_PROJECT / "data" / "transactions.csv"
+path_csv = PATH_TO_CSV
 
 
 def reader_file_transaction_csv(path):
@@ -36,4 +36,4 @@ def reader_file_transaction_csv(path):
 
 
 # if __name__ == "__main__":
-#     print(reader_file_transaction_csv('/home/sergey/Рабочий стол/мои проекты/PoetryProject/data/transactions.csv'))
+#     print(reader_file_transaction_csv(path_csv))

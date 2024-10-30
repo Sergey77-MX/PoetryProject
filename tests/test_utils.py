@@ -13,7 +13,7 @@ def path():
 
 @pytest.fixture
 def path_mistake_json():
-    PATH_TO_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "operations_2.json")
+    PATH_TO_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "operations_1.json")
     return PATH_TO_FILE
 
 
