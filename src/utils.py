@@ -14,7 +14,6 @@ api_key = os.getenv("API_KEY")
 
 PATH_TO_PROJECT = Path(__file__).resolve().parent.parent
 PATH_TO_FILE = PATH_TO_PROJECT / "data" / "operations.json"
-# path = PATH_TO_FILE
 
 logger = logging.getLogger("utils")
 logger.setLevel(logging.DEBUG)
