@@ -5,7 +5,6 @@ from src.reader_data_csv import reader_file_transaction_csv
 from src.reader_data_excel import reader_file_transaction_excel
 from src.utils import financial_transactions
 
-
 json_file = financial_transactions("..//data/operations.json")
 csv_file = reader_file_transaction_csv("..//data/transactions.csv")
 excel_file = reader_file_transaction_excel("..//data/transactions_excel.xlsx")

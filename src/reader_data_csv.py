@@ -1,8 +1,5 @@
 import csv
-
 from pathlib import Path
-
-# from main import path_csv
 
 PATH_TO_PROJECT = Path(__file__).resolve().parent.parent
 PATH_TO_CSV = PATH_TO_PROJECT / "data" / "transactions.csv"

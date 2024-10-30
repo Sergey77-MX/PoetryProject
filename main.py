@@ -129,4 +129,5 @@ def main():
                 else:
                     print(f'Сумма: {amount} {trans["operationAmount"]["currency"]["code"]}\n')
 
-main()
+if __name__ == "__main__":
+    main()

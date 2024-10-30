@@ -1,12 +1,9 @@
-from typing import Any
-
-
 def filter_by_state(data, state):
     """Функция фильтрует данные по указанному состоянию"""
     return [d for d in data if d.get('state') == state]
 
 
-def sort_by_date(date_list, direction = True) -> list:
+def sort_by_date(date_list, direction=True):
     """Функция сортировки списка словарей по дате"""
     sorted_list = sorted(date_list, key=lambda x: x.get("date"), reverse=direction)
     return sorted_list
@@ -23,4 +20,3 @@ def sort_by_date(date_list, direction = True) -> list:
 #     print(filter_by_state(data_1, 'state'))
 #     print(data_1)
 #     print(state)
-

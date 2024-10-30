@@ -1,10 +1,11 @@
-import pandas as pd
-
 from pathlib import Path
+
+import pandas as pd
 
 PATH_TO_PROJECT = Path(__file__).resolve().parent.parent
 PATH_TO_EXCEL = PATH_TO_PROJECT / "data" / "transactions_excel.xlsx"
 path_xlsx = PATH_TO_EXCEL
+
 
 def reader_file_transaction_excel(path):
     """Принимает путь до EXCEL-файла и возвращает список словарей с данными о финансовых транзакциях"""
